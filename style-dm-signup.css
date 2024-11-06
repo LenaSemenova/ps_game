@@ -1,0 +1,260 @@
+@font-face {
+    font-family: 'Mont Regular';
+    src: url('./public/fonts/Mont-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Mont SemiBold';
+    src: url('./public/fonts/Mont-SemiBold.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    background-color: #FFD12D;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 11% 78% 11%;
+}
+.form-container {
+    align-self: center;
+    grid-column: 2;
+}
+.info-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.logo-mobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo-mobile img {
+    width: 250px;
+    height: 50px;
+    margin-bottom: 24px;
+}
+.mobile-game-name {
+    width: 100%;
+    font-family: 'Mont SemiBold';
+    font-size: 20px;
+    margin-bottom: 48px;
+    text-align: center;
+}
+.logo-desktop {
+    display: none;
+}
+.dm-form-info-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.cta-signup {
+    font-family: 'Mont SemiBold';
+    font-size: 12px;
+}
+.form-wrapper {
+    width: 100%;
+    font-family: 'Mont Regular';
+    font-size: 12px;
+}
+.form-wrapper form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+input {
+    margin-bottom: 23px;
+}
+label {
+    display: block;
+    width: 100%;
+}
+#name, #phone-number, #email {
+    width: 94%;
+    height: 30px;
+    border: 1px solid #bebebe;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Mont Regular';
+    font-size: 12px;
+}
+.confirmation-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.checkbox-wrapper {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+input.checkbox {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid transparent;
+    z-index: 1;
+}
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 1px solid #bebebe;
+    border-radius: 5px;
+
+}
+.checkbox-wrapper:hover input.checkbox ~ .checkmark {
+    background-color: #1D2136;
+}
+.checkbox-wrapper input.checkbox:checked ~ .checkmark {
+    background-color: #1D2136;
+}
+.checkmark::after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+
+.checkbox-wrapper input.checkbox:checked + .checkmark::after {
+    display: block;
+}
+.checkmark::after {
+    left: 6px;
+    top: 2.5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0px 3px 3px 0px;
+    transform: rotate(45deg);
+}
+
+/*input#confirmation:checked + span {
+    display: block;
+    width: 150px;
+    height: 150px;
+    background-color: green;
+}
+*/
+#confirmation {
+    margin-right: 20px;
+}
+.confirmation-text {
+    font-size: 10px;
+    margin-left: 30px;
+}
+.accept-link {
+    color: black;
+}
+.btn-start {
+    width: 194px;
+    height: 48px;
+    font-family: 'Mont SemiBold';
+    font-size: 16px;
+    background-color: #1D2136;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+.btn-start:hover {
+    opacity: 1;
+}
+@media only screen and (min-width: 600px) {
+    .container {
+        grid-template-columns: 18% 64% 18%;
+    }
+}
+
+@media only screen and (min-width: 820px) {
+    .container {
+        grid-template-columns: 24% 52% 24%;
+    }
+    .logo-mobile img {
+        width: 280px;
+        height: 56px;
+    }
+    .mobile-game-name {
+        font-size: 28px;
+    }
+    .cta-signup {
+        font-size: 18px;
+    }
+    .form-wrapper {
+        font-size: 18px;
+    }
+    .confirmation-text {
+        font-size: 12px;
+    }
+    .btn-start {
+        width: 220px;
+        height: 56px;
+        font-size: 18px;
+    }
+}
+
+@media only screen and (min-width: 1280px) {
+    .container {
+        grid-template-columns: 33% 34% 33%;
+    }
+    .logo-mobile {
+        display: none;
+    }
+    .logo-desktop {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+    .logo-desktop-wrapper {
+        width: 186px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: #1D2136;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .logo-desktop-wrapper img {
+        width: 158px;
+        height: 24px;
+    }
+    .desktop-game-name {
+        font-family: 'Mont SemiBold';
+        font-size: 22px;
+    }
+    .exit-desktop-wrapper img {
+        width: 18px;
+        height: 20px;
+    }
+    #name, #phone-number, #email {
+        width: 100%;
+        height: 30px;
+        margin-bottom: 30px;
+    }
+    
+    #confirmation {
+        margin-right: 20px;
+    }
+  }

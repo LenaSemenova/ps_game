@@ -1,0 +1,8 @@
+body {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 16% 68% 16%;
+    grid-template-rows: 100%;
+    background-color: rgb(29, 33, 54);
+}

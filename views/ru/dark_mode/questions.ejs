@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Правда или ложь?</title>
+    <link rel="stylesheet" href="/styles/dark_mode/questions.css" />
+  </head>
+  <body>    
+    <div class="container">
+    <div class="score"><%= player_data[0].total_questions %> / 6</div>
+    <div class="container-question">
+    <div class="title">СУЩЕСТВУЕТ ЛИ ПРОДУКТ?</div>
+    <div class="company-name-desktop"><%= question[0].company_name %></div>
+    <div class="company-logo-wrapper">
+      <img src="/logos/<%= question[0].company_logo %>" alt="Логотип продукта" />
+    </div>
+    <div class="company-name-mobile"><%= question[0].company_name %></div>
+    <div class="company-description"><%= question[0].description_ru %></div>
+    <div class="buttons-wrapper">
+    <form class="formAnswers" action="/game/questions/<%= player_data[0].player_id %>/<%= question[0].question_id %>/feedback" method="POST">
+    <button class="btn-true" name="guess" value="true">ПРАВДА</button>
+    <button class="btn-false" name="guess" value="false">ЛОЖЬ</button>
+    </form>
+    </div>
+    </div>
+    </div>
+  <!--<script type="module" src="/scripts/ru/dark_mode/questions.js"></script>-->
+  </body>
+</html>
