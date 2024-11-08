@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'Mont Regular';
+    src: url('./public/fonts/Mont-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Mont SemiBold';
+    src: url('./public/fonts/Mont-SemiBold.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 7% 86% 7%;
+    height: 100vh;
+    background-color: #1D2136;
+}
+.container {
+    grid-column: 2;
+    width: 76%;
+    height: 78%;
+    justify-self: center;
+    align-self: center;
+    background-color: #FFD12D;
+    border-radius: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 35px;
+    animation: zoom 1s ease;
+}
+@keyframes zoom {
+    from {
+        transform: scale(0.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+.container-false {
+    border: 5px solid #FF7676;
+}
+.container-right {
+    border: 5px solid #A2FF76;
+}
+.title-good, .title-bad {
+    width: 100%;
+    font-family: 'Mont SemiBold';
+    font-size: 32px;
+    text-align: center;
+}
+.title-bad span {
+    display: grid;
+    width: 100%;
+}
+.image-good-wrapper, .image-bad-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.company-name {
+    width: 100%;
+    font-family: 'Mont SemiBold';
+    font-size: 20px;
+    text-align: center;
+}
+.company-description {
+    width: 100%;
+    font-family: 'Mont Regular';
+    font-size: 16px; 
+    text-align: center;
+}
+a {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    text-decoration: none;
+}
+.btn-back {
+    width: 90%;
+    height: 47px;
+    font-family: 'Mont SemiBold';
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background-color: #1D2136;
+    opacity: 0.9;
+}
+.btn-back:hover {
+    opacity: 1;
+}
+@media only screen and (min-width: 600px) {
+    .container {
+        height: 64%;
+    }
+    .btn-back {
+        width: 68%;
+    }
+}
+@media only screen and (min-width: 820px) {
+    body {
+        grid-template-columns: 14% 72% 14%;
+    }
+    .company-description {
+        font-size: 18px;
+    }
+    .btn-back {
+        width: 55%;
+        font-size: 18px;
+        height: 50px;
+    }
+}
+@media only screen and (min-width: 1024px) {
+    body {
+        grid-template-columns: 27% 46% 27%;
+    }
+}

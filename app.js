@@ -93,8 +93,6 @@ const addNewPlayer = async(req, res) => {
     let playerID; 
     console.log('Check if this email is already in the database');
     const data = req.body;
-    console.log(data);
-    console.log(data.email);
     const isRegistered = await DB_Model.isRegistered(data.email);
     console.log(isRegistered);
     if(isRegistered.length === 0) {
@@ -109,9 +107,14 @@ const addNewPlayer = async(req, res) => {
         playerID = await DB_Model.getRegistered(newPlayer);
         return res.redirect(`/game/questions/${playerID}`);
     } else {
-        console.log('You are already registered!');
-    }
-    
+        console.log(isRegistered.length);
+        console.log(isRegistered[0].total_questions);
+        if (isRegistered[0].total_questions < 6) {
+            console.log(`Your questions: ${isRegistered[0].total_questions}`);
+            playerID = isRegistered[0].player_id;
+            return res.redirect(`/game/questions/${playerID}`);
+        }
+}
 }
 
 //const renderQuestions = async (req, res) => {
@@ -136,22 +139,28 @@ const newQuestion = async(req, res) => {
 }
 
 const buildFeedback = async(req, res) => {
-    console.log('Router to build feedback is called!');
+
+    // taking player's guess
+
     const data = req.body;
-    console.log(data);
     let guess;
     if (data.guess === 'true') {
         guess = 1;
     } else {
         guess = 0;
     }
-    console.log(guess);
+
+    // taking all the infos to render feedback
+
+
     const playerID = req.params.player_id;
+    const playerInfo = await DB_Model.getInfos(playerID);
     const questionID = req.params.question_id;
     const question = await DB_Model.getQuestion(questionID);
-    const playerInfo = await DB_Model.getInfos(playerID);
+    
     let playerTotalScore = playerInfo[0].total_questions;
     let playerRightScore = playerInfo[0].right_answers;
+
     if (question[0].company_exists === guess) {
         console.log('You are right!');
         playerTotalScore = playerTotalScore + 1;
@@ -159,7 +168,7 @@ const buildFeedback = async(req, res) => {
         const result = await DB_Model.updateScore(playerTotalScore, playerRightScore, playerInfo[0].player_id);
         if (result.affectedRows !== 0) {
             const newPlayerInfo = await DB_Model.getInfos(playerID);
-            return res.render('ru/dark_mode/feedback', {question, newPlayerInfo});
+            return res.render('ru/dark_mode/feedback', {question, newPlayerInfo, guess});
         }
     } else {
         console.log('You are false!');
@@ -167,9 +176,15 @@ const buildFeedback = async(req, res) => {
         const result = await DB_Model.updateScore(playerTotalScore, playerRightScore, playerInfo[0].player_id);
         if (result.affectedRows !== 0) {
             const newPlayerInfo = await DB_Model.getInfos(playerID);
-            return res.render('ru/dark_mode/feedback', {question, newPlayerInfo});
+            return res.render('ru/dark_mode/feedback', {question, newPlayerInfo, guess});
         }
     }
+}
+
+const renderFinalResult = async(req, res) => {
+    const playerID = req.params.player_id;
+    const playerInfo = await DB_Model.getInfos(playerID);
+    return res.render('ru/dark_mode/final_result', { playerInfo });
 }
 
 router.get('/', mainPage);
@@ -181,6 +196,7 @@ router.get('/registration/de', registrationPage_DE);
 router.post('/registration/newUser', addNewPlayer);
 router.get('/questions/:player_id', newQuestion);
 router.post('/questions/:player_id/:question_id/feedback', buildFeedback);
+router.get('/:player_id/final_result', renderFinalResult);
 
 
 app.listen(PORT, () => {
