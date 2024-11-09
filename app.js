@@ -1,10 +1,12 @@
 import express from "express";
 import { json, urlencoded } from "express";
 import { Router } from "express";
-import mysql from "mysql2/promise";
+import DB_Model from "./db_model/database_model.js";
+import updateInfos from "./db_model/transactions_model.js";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+
 
 const app = express();
 const PORT = 3000;
@@ -25,43 +27,7 @@ app.use(json());
 app.use(urlencoded({ extended : true}));
 app.use(cors());
 
-//connection with the database
 
-const connectionPool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'mySQLpass',
-    database: 'petproject_game'
-});
-
-const DB_Model = {
-    isRegistered : async (player_data) => {
-        const [result] = await connectionPool.query('SELECT * FROM players WHERE email = ?',
-            [player_data]);
-            return result;
-    },
-    getRegistered: async (player_data) => {
-        const [result] = await connectionPool.query('INSERT INTO players (name, phone_number, email, total_questions, right_answers, agreement) VALUES(?, ?, ?, ?, ?, ?)',
-            [player_data.name, player_data.phone_number, player_data.email, player_data.total_questions, player_data.right_answers, player_data.agreement]);
-            console.log(result.insertId);
-            return result.insertId;
-    },
-    getInfos: async (player_id) => {
-        const [result] = await connectionPool.query('SELECT * FROM players WHERE player_id = ?',
-            [player_id]);
-        return result;
-    },
-    getQuestion: async(index) => {
-        const [result] = await connectionPool.query('SELECT * FROM questions WHERE question_id = ?', 
-            [index]);
-            return result;
-    },
-    updateScore: async(total_questions, right_answers, player_id) => {
-        const [result] = await connectionPool.query('UPDATE players SET total_questions = ?, right_answers = ? WHERE player_id = ?',
-            [total_questions, right_answers, player_id]);
-        return result;
-    }
-}
 // redirecting the main router
 app.use('/game', router);
 
@@ -113,6 +79,10 @@ const addNewPlayer = async(req, res) => {
             console.log(`Your questions: ${isRegistered[0].total_questions}`);
             playerID = isRegistered[0].player_id;
             return res.redirect(`/game/questions/${playerID}`);
+        } else {
+            console.log(`Your questions: ${isRegistered[0].total_questions}`);
+            playerID = isRegistered[0].player_id;
+            return res.redirect(`/game/${playerID}/final_result`);
         }
 }
 }
@@ -128,11 +98,15 @@ const newQuestion = async(req, res) => {
     try {
         const player_data = await DB_Model.getInfos(playerID);
         console.log(player_data);
-        let randomIndex = Math.floor(Math.random() * 20 + 1);
-        const question = await DB_Model.getQuestion(randomIndex);
-        console.log(question);
-        return res.render('ru/dark_mode/questions', {question, player_data}); 
-    } catch (error) {
+        const randomIndex = (availableQuestions) => {
+            return Math.floor(Math.random() * availableQuestions + 1)
+        };
+        const questions = await DB_Model.getQuestions();
+        console.log(questions.length);
+        const pulledQuestion = questions[randomIndex(questions.length)];
+        console.log(pulledQuestion);
+        return res.render('ru/dark_mode/questions', {pulledQuestion, player_data}); 
+    }  catch (error) {
         console.log('You have to deal with: ' + error);
         return res.status(500).json({errorMessage: 'No data has been given!'});
     }
@@ -165,20 +139,20 @@ const buildFeedback = async(req, res) => {
         console.log('You are right!');
         playerTotalScore = playerTotalScore + 1;
         playerRightScore = playerRightScore + 1;
-        const result = await DB_Model.updateScore(playerTotalScore, playerRightScore, playerInfo[0].player_id);
-        if (result.affectedRows !== 0) {
+        const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
+        if (resultOfTransaction === "ok") {
             const newPlayerInfo = await DB_Model.getInfos(playerID);
             return res.render('ru/dark_mode/feedback', {question, newPlayerInfo, guess});
         }
     } else {
         console.log('You are false!');
         playerTotalScore = playerTotalScore + 1;
-        const result = await DB_Model.updateScore(playerTotalScore, playerRightScore, playerInfo[0].player_id);
-        if (result.affectedRows !== 0) {
+        const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
+        if (resultOfTransaction) {
             const newPlayerInfo = await DB_Model.getInfos(playerID);
             return res.render('ru/dark_mode/feedback', {question, newPlayerInfo, guess});
-        }
-    }
+        }    
+}
 }
 
 const renderFinalResult = async(req, res) => {

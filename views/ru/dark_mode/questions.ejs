@@ -12,14 +12,14 @@
     <div class="score"><%= player_data[0].total_questions + 1 %>  / 6</div>
     <div class="container-question">
     <div class="title">СУЩЕСТВУЕТ ЛИ ПРОДУКТ?</div>
-    <div class="company-name-desktop"><%= question[0].company_name %></div>
+    <div class="company-name-desktop"><%= pulledQuestion.company_name %></div>
     <div class="company-logo-wrapper">
-      <img src="/logos/<%= question[0].company_logo %>" alt="Логотип продукта" />
+      <img src="/logos/<%= pulledQuestion.company_logo %>" alt="Логотип продукта" />
     </div>
-    <div class="company-name-mobile"><%= question[0].company_name %></div>
-    <div class="company-description"><%= question[0].description_ru %></div>
+    <div class="company-name-mobile"><%= pulledQuestion.company_name %></div>
+    <div class="company-description"><%= pulledQuestion.description_ru %></div>
     <div class="buttons-wrapper">
-    <form class="formAnswers" action="/game/questions/<%= player_data[0].player_id %>/<%= question[0].question_id %>/feedback" method="POST">
+    <form class="formAnswers" action="/game/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
     <button class="btn-true" name="guess" value="true">ПРАВДА</button>
     <button class="btn-false" name="guess" value="false">ЛОЖЬ</button>
     </form>
