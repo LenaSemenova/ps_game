@@ -9,7 +9,7 @@ const connectionPool = mysql.createPool({
     database: 'petproject_game'
 });
 
-const DB_Model = {
+const DB_GENERAL = {
     isRegistered : async (player_data) => {
         const [result] = await connectionPool.query('SELECT * FROM players WHERE email = ?',
             [player_data]);
@@ -21,20 +21,24 @@ const DB_Model = {
             console.log(result.insertId);
             return result.insertId;
     },
-    getInfos: async (player_id) => {
+    aboutPlayer: async (player_id) => {
         const [result] = await connectionPool.query('SELECT * FROM players WHERE player_id = ?',
             [player_id]);
         return result;
     },
-    getQuestions: async() => {
-        const [result] = await connectionPool.query('SELECT * FROM questions WHERE question_used = 0');
+    availableQuestions: async(player_id) => {
+        const [result] = await connectionPool.query(`SELECT * FROM questions_for_${player_id} WHERE question_used = 0`);
             return result;
     },
-    getQuestion: async(index) => {
-        const [result] = await connectionPool.query('SELECT * FROM questions WHERE question_id = ?',
+    getQuestion: async(index, player_id) => {
+        const [result] = await connectionPool.query(`SELECT * FROM questions_for_${player_id} WHERE question_id = ?`,
             [index]);
             return result;
+    },
+    deleteCopies: async(player_id) => {
+        const [result] = await connectionPool.query(`DROP TABLE questions_for_${player_id}`);
+        return result;
     }
 }
 
-export default DB_Model;
+export default DB_GENERAL;

@@ -1,11 +1,13 @@
 import express from "express";
 import { json, urlencoded } from "express";
 import { Router } from "express";
-import DB_Model from "./db_model/database_model.js";
-import updateInfos from "./db_model/transactions_model.js";
+import DB_GENERAL from "./db_model/db_general.js";
+import updateInfos from "./db_model/db_while_playing.js";
+import startGame from "./db_model/db_start.js";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+
 
 
 const app = express();
@@ -59,7 +61,7 @@ const addNewPlayer = async(req, res) => {
     let playerID; 
     console.log('Check if this email is already in the database');
     const data = req.body;
-    const isRegistered = await DB_Model.isRegistered(data.email);
+    const isRegistered = await DB_GENERAL.isRegistered(data.email);
     console.log(isRegistered);
     if(isRegistered.length === 0) {
         newPlayer.name = data.playerName;
@@ -70,7 +72,7 @@ const addNewPlayer = async(req, res) => {
         newPlayer.total_questions = 0;
         newPlayer.right_answers = 0;
         newPlayer.agreement = data.agreement;
-        playerID = await DB_Model.getRegistered(newPlayer);
+        playerID = await startGame(newPlayer);
         return res.redirect(`/game/questions/${playerID}`);
     } else {
         console.log(isRegistered.length);
@@ -92,18 +94,18 @@ const addNewPlayer = async(req, res) => {
 //}
 
 const newQuestion = async(req, res) => {
-    console.log('GET request to the database!');
     const playerID = req.params.player_id;
-    console.log(playerID);
     try {
-        const player_data = await DB_Model.getInfos(playerID);
+        const player_data = await DB_GENERAL.aboutPlayer(playerID);
         console.log(player_data);
         const randomIndex = (availableQuestions) => {
             return Math.floor(Math.random() * availableQuestions + 1)
         };
-        const questions = await DB_Model.getQuestions();
+        const questions = await DB_GENERAL.availableQuestions(playerID);
         console.log(questions.length);
-        const pulledQuestion = questions[randomIndex(questions.length)];
+        let questionIndex = randomIndex(questions.length);
+        console.log(questionIndex);
+        const pulledQuestion = questions[questionIndex];
         console.log(pulledQuestion);
         return res.render('ru/dark_mode/questions', {pulledQuestion, player_data}); 
     }  catch (error) {
@@ -128,9 +130,9 @@ const buildFeedback = async(req, res) => {
 
 
     const playerID = req.params.player_id;
-    const playerInfo = await DB_Model.getInfos(playerID);
+    const playerInfo = await DB_GENERAL.aboutPlayer(playerID);
     const questionID = req.params.question_id;
-    const question = await DB_Model.getQuestion(questionID);
+    const question = await DB_GENERAL.getQuestion(questionID, playerID);
     
     let playerTotalScore = playerInfo[0].total_questions;
     let playerRightScore = playerInfo[0].right_answers;
@@ -141,7 +143,7 @@ const buildFeedback = async(req, res) => {
         playerRightScore = playerRightScore + 1;
         const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
         if (resultOfTransaction === "ok") {
-            const newPlayerInfo = await DB_Model.getInfos(playerID);
+            const newPlayerInfo = await DB_GENERAL.aboutPlayer(playerID);
             return res.render('ru/dark_mode/feedback', {question, newPlayerInfo, guess});
         }
     } else {
@@ -149,7 +151,7 @@ const buildFeedback = async(req, res) => {
         playerTotalScore = playerTotalScore + 1;
         const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
         if (resultOfTransaction) {
-            const newPlayerInfo = await DB_Model.getInfos(playerID);
+            const newPlayerInfo = await DB_GENERAL.aboutPlayer(playerID);
             return res.render('ru/dark_mode/feedback', {question, newPlayerInfo, guess});
         }    
 }
@@ -157,7 +159,9 @@ const buildFeedback = async(req, res) => {
 
 const renderFinalResult = async(req, res) => {
     const playerID = req.params.player_id;
-    const playerInfo = await DB_Model.getInfos(playerID);
+    const playerInfo = await DB_GENERAL.aboutPlayer(playerID);
+    const deleted = await DB_GENERAL.deleteCopies(playerID);
+    console.log(deleted);
     return res.render('ru/dark_mode/final_result', { playerInfo });
 }
 
