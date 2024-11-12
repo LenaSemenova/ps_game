@@ -6,11 +6,6 @@
     font-family: 'Mont SemiBold';
     src: url('./public/fonts/Mont-SemiBold.ttf') format('truetype');
 }
-/*.dm-main {
-    margin: 0;
-    background-color: rgb(29, 33, 54);
-}
-*/
 body {
     height: 100vh;
     margin: 0;
