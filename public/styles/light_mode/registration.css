@@ -8,7 +8,7 @@
 }
 body {
     margin: 0;
-    background-color: #FFD12D;
+    background-color: #1D2136;
 }
 .container {
     width: 100%;
@@ -46,6 +46,7 @@ body {
     font-size: 20px;
     margin-bottom: 48px;
     text-align: center;
+    color: white;
 }
 .logo-desktop {
     display: none;
@@ -59,6 +60,7 @@ body {
 .cta-signup {
     font-family: 'Mont SemiBold';
     font-size: 12px;
+    color: white;
 }
 .form-wrapper {
     width: 100%;
@@ -77,6 +79,7 @@ input {
 label {
     display: block;
     width: 100%;
+    color: white;
 }
 #name, #phone-number, #email {
     width: 94%;
@@ -124,10 +127,10 @@ input.checkbox {
 
 }
 .checkbox-wrapper:hover input.checkbox ~ .checkmark {
-    background-color: #1D2136;
+    background-color: #FFD12D;
 }
 .checkbox-wrapper input.checkbox:checked ~ .checkmark {
-    background-color: #1D2136;
+    background-color: #FFD12D;
 }
 .checkmark::after {
     content: '';
@@ -143,27 +146,21 @@ input.checkbox {
     top: 2.5px;
     width: 5px;
     height: 10px;
-    border: solid white;
+    border: solid #1D2136;
     border-width: 0px 3px 3px 0px;
     transform: rotate(45deg);
 }
 
-/*input#confirmation:checked + span {
-    display: block;
-    width: 150px;
-    height: 150px;
-    background-color: green;
-}
-*/
 #confirmation {
     margin-right: 20px;
 }
 .confirmation-text {
     font-size: 10px;
     margin-left: 30px;
+    color: white;
 }
 .accept-link {
-    color: black;
+    color: #FFD12D;
 }
 .btn-start {
     width: 194px;
@@ -171,8 +168,8 @@ input.checkbox {
     margin-bottom: 60px;
     font-family: 'Mont SemiBold';
     font-size: 16px;
-    background-color: #1D2136;
-    color: white;
+    background-color: #FFD12D;
+    color: black;
     border: none;
     border-radius: 10px;
     opacity: 0.9;
@@ -232,7 +229,7 @@ input.checkbox {
         width: 186px;
         height: 50px;
         border-radius: 10px;
-        background-color: #1D2136;
+        background-color: white;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -245,6 +242,7 @@ input.checkbox {
     .desktop-game-name {
         font-family: 'Mont SemiBold';
         font-size: 22px;
+        color: white;
     }
     .exit-desktop-wrapper img {
         width: 18px;

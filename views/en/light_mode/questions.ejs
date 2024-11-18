@@ -4,24 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Правда или ложь?</title>
+    <title>Truth or lie?</title>
     <link rel="stylesheet" href="/styles/dark_mode/questions.css" />
   </head>
   <body>    
     <div class="container">
     <div class="score"><%= player_data[0].total_questions + 1 %>  / 6</div>
     <div class="container-question">
-    <div class="title">СУЩЕСТВУЕТ ЛИ ПРОДУКТ?</div>
+    <div class="title">DOES THIS PRODUCT EXIST?</div>
     <div class="company-name-desktop"><%= pulledQuestion.company_name %></div>
     <div class="company-logo-wrapper">
-      <img src="/logos/<%= pulledQuestion.company_logo %>" alt="Логотип продукта" />
+      <img src="/logos/<%= pulledQuestion.company_logo %>" alt="Logo of the product" />
     </div>
     <div class="company-name-mobile"><%= pulledQuestion.company_name %></div>
-    <div class="company-description"><%= pulledQuestion.description_ru %></div>
+    <div class="company-description"><%= pulledQuestion.description_en %></div>
     <div class="buttons-wrapper">
-    <form class="formAnswers" action="/game/ru/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
-    <button class="btn-true" name="guess" value="true">ПРАВДА</button>
-    <button class="btn-false" name="guess" value="false">ЛОЖЬ</button>
+    <form class="formAnswers" action="/game/en/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
+    <button class="btn-true" name="guess" value="true">TRUTH</button>
+    <button class="btn-false" name="guess" value="false">LIE</button>
     </form>
     </div>
     </div>

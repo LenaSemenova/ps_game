@@ -63,7 +63,7 @@ body {
 .container-wrapper {
     grid-column: 1 / span 3;
     grid-row: 2;
-    background-color: #1d2136;
+    background-color: #FFD12D;
 }
 .container {
     width: 100%;
@@ -73,7 +73,6 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    
 }
 .game-logo-wrapper {
     height: 122px;
@@ -134,7 +133,7 @@ body {
     font-family: 'Mont Regular';
     font-size: 20px;
     line-height: 22px;
-    color: white;
+    color: black;
     text-align: center;
     width: 100%;
     margin-bottom: 46px;
@@ -144,7 +143,7 @@ body {
     font-weight: 700;
     font-size: 25px;
     line-height: 27.5px;
-    color: white; 
+    color: black; 
     width: 100%;
     height: 39px;
     text-align: center;
@@ -155,9 +154,10 @@ body {
     padding: 16px 76px 16px 76px;
     border-radius: 10px;
     border: 0px;
-    background-color: #FFD12D;
+    background-color: #1D2136;
     font-family: 'Mont SemiBold';
     font-size: 16px;
+    color: white;
     line-height: 17.6px;
     margin-bottom: 46px;
     opacity: 0.9;
@@ -177,7 +177,7 @@ a .btn-take-part {
     font-family: 'Mont Regular';
     font-weight: 400;
     font-size: 20px;
-    color: white;
+    color: black;
     text-decoration: underline;
     width: 100%;
     height: 29px;

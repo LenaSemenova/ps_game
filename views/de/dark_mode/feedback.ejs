@@ -4,50 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Повезло?</title>
+    <title>Glück gehabt?</title>
     <link rel="stylesheet" href="/styles/dark_mode/feedback.css" />
   </head>
   <body>
     <% if(guess  === question[0].company_exists) { %>
     <div class="container container-right">
-    <div class="title-good">Молодец</div>
+    <div class="title-good">Geschafft!</div>
     <div class="image-good-wrapper">
-        <img src="/icons/dark_character/dark-masyanya-true.png">
+        <img src="/icons/light_character/light-masyanya-true.png">
     </div>
     <div class="company-name"><%= question[0].company_name %>
       <% if(question[0].company_exists === 1) { %>
-        СУЩЕСТВУЕТ
+        EXISTIERT
       <% } else { %>
-        НЕ СУЩЕСТВУЕТ
+        EXISTIERT NICHT
       <% } %>
     </div>
-    <div class="company-description"><%= question[0].description_ru %></div>
+    <div class="company-description"><%= question[0].description_de %></div>
     <% console.log(newPlayerInfo[0].total_questions) %>
     <% if(newPlayerInfo[0].total_questions < 6) { %>
-      <a href="/game/ru/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">ВЕРНУТЬСЯ К ИГРЕ</button></a>
+      <a href="/game/de/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">WEITER SPIELEN</button></a>
       <% } else { %>
-        <a href="/game/ru/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">ВЕРНУТЬСЯ К ИГРЕ</button></a>  
+        <a href="/game/de/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">WEITER SPIELEN</button></a>  
     </div>
     <% } %>
     <% } else { %>
       <div class="container container-false">
-      <div class="title-bad">Хорошая попытка, но нет</div>
+      <div class="title-bad">
+        <span>Gescheitert!</span>
+        <span>Guter Versuch aber...</span>
+      </div>
       <div class="image-bad-wrapper">
-        <img src="/icons/dark_character/dark-masyanya-lie.png">
+        <img src="/icons/light_character/light-masyanya-lie.png">
       </div>
       <div class="company-name"><%= question[0].company_name %>
         <% if(question[0].company_exists === 1) { %>
-          СУЩЕСТВУЕТ
+          EXISTIERT
         <% } else { %>
-          НЕ СУЩЕСТВУЕТ
+          EXISTIERT NICHT
         <% } %>
       </div>
-      <div class="company-description"><%= question[0].description_ru %></div>
+      <div class="company-description"><%= question[0].description_de %></div>
       <% console.log(newPlayerInfo[0].total_questions) %>
       <% if(newPlayerInfo[0].total_questions < 6) { %>
-      <a href="/game/ru/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">ВЕРНУТЬСЯ К ИГРЕ</button></a>
+      <a href="/game/de/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">WEITER SPIELEN</button></a>
       <% } else { %>
-        <a href="/game/ru/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">ВЕРНУТЬСЯ К ИГРЕ</button></a>  
+        <a href="/game/de/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">WEITER SPIELEN</button></a>  
       <% } %>
       </div>
     <% } %>

@@ -35,6 +35,10 @@ const DB_GENERAL = {
             [index]);
             return result;
     },
+    isTable: async () => {
+        const [result] = await connectionPool.query(`SHOW TABLES`);
+        return result;
+    },
     deleteCopies: async(player_id) => {
         const [result] = await connectionPool.query(`DROP TABLE questions_for_${player_id}`);
         return result;

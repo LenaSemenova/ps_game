@@ -12,7 +12,7 @@ let errors = [];
 async function sendData(data) {
     console.log('Router is called!');
     console.log(data);
-    return await fetch('http://localhost:3000/game/ru/registration/newUser', {
+    return await fetch('http://localhost:3000/game/light-mode/ru/registration/newUser', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data),

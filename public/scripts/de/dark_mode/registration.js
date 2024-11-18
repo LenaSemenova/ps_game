@@ -9,18 +9,17 @@ const btnStart = document.querySelector('.btn-start');
 let newPlayer = {};
 let errors = [];
 
-/*async function sendData(data) {
-    return await fetch('http://127.0.0.1:8000/users/api/', {
+async function sendData(data) {
+    console.log('Router is called!');
+    console.log(data);
+    return await fetch('http://localhost:3000/game/de/registration/newUser', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data),
     })
 }
-*/
 
-
-
-function collectData (event) {
+async function collectData (event) {
     event.preventDefault();
     if (playerName.value) {
         newPlayer.playerName = playerName.value;
@@ -38,7 +37,7 @@ function collectData (event) {
     if (confirmation.checked) {
         newPlayer.agreement = true;
     } else {
-        errors.push('* Deine EINWILLIGUNG muss bestätigt werden!')
+        errors.push('* Deine EINWILLIGUNG muss bestätigt werden!');
     }
     
     if (errors.length > 0) {
@@ -46,22 +45,17 @@ function collectData (event) {
         alert(errors.join('\n'));
         errors = [];
     } else {
-        console.log(newPlayer);
-        setTimeout(() => {
-            window.location.href='./1st_page.html';
-        }, '2000');
+        const response = await sendData(newPlayer);
+        if (response.status === 200) {
+            window.location.href = response.url;
+        }
     }
     
-    //const response = await sendData(newPlayer);
-    //if (response.status === 201) {
-    //window.location.href = "./dark-mode-questions.html"; ??? redirect - server-side solution
-    //}
 }
 
 
-
 window.addEventListener("DOMContentLoaded", () => {
-    btnStart.addEventListener('click', collectData)
+    btnStart.addEventListener('click', collectData);
 });
 
 
