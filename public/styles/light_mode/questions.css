@@ -90,19 +90,17 @@ form {
 }
 @keyframes backgroundColorTrue {
     0% {
-        background-image: linear-gradient(135deg, #1D2136 0%,#A2FF76 50%, #1D2136 100%);
-    }
-    25% {
-        background-image: linear-gradient(135deg, #A2FF76 0%, #1D2136 50%, #A2FF76 100%); 
+        background-color: #A2FF76; 
+        opacity: 1;
     }
     50% {
-        background-image: linear-gradient(135deg, #1D2136 0%,#A2FF76 50%, #1D2136 100%);
-    }
-    75% {
-        background-image: linear-gradient(135deg, #A2FF76 0%,#1D2136 50%, #A2FF76 100%);  
+        background-color: #1D2136;
+        color: white;
+        opacity: 1;
     }
     100% {
-        background-image: linear-gradient(135deg, #1D2136 0%,#A2FF76 50%, #1D2136 100%);
+        background-color: #A2FF76;
+        opacity: 1;  
     }   
 }
 .buttons-wrapper .btn-true {
@@ -118,26 +116,25 @@ form {
     color: black;
     text-align: center;
     opacity: 0.9;
-    animation: backgroundColorTrue 1s ease 1s;
+    cursor: pointer;
+    animation: backgroundColorTrue 2s ease 1s 2;
 }
 .buttons-wrapper .btn-true:hover {
     opacity: 1;
 }
 @keyframes backgroundColorFalse {
     0% {
-        background-image: linear-gradient(135deg, #1D2136 0%,#FF7676 50%, #1D2136 100%);
-    }
-    25% {
-        background-image: linear-gradient(135deg, #FF7676 0%, #1D2136 50%, #FF7676 100%); 
+        background-color: #FF7676;
+        opacity: 1; 
     }
     50% {
-        background-image: linear-gradient(135deg, #1D2136 0%,#FF7676 50%, #1D2136 100%);
-    }
-    75% {
-        background-image: linear-gradient(135deg, #FF7676 0%,#1D2136 50%, #FF7676 100%);  
+        background-color: #1D2136;
+        color: white;
+        opacity: 1;
     }
     100% {
-        background-image: linear-gradient(135deg, #1D2136 0%,#FF7676 50%, #1D2136 100%);
+        background-color: #FF7676;  
+        opacity: 1;
     }   
 }
 .buttons-wrapper .btn-false {
@@ -153,8 +150,8 @@ form {
     text-align: center;
     color: white;
     opacity: 0.9;
-    animation: backgroundColorFalse 1s ease 2s;
-    
+    cursor: pointer;
+    animation: backgroundColorFalse 2s ease 2;
 }
 .buttons-wrapper .btn-false:hover {
     opacity: 1;

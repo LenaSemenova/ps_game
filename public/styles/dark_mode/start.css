@@ -255,7 +255,7 @@ a .btn-take-part {
     .btn-true {
     width: 199px;
     height: 50px;
-    background-color: #FFD12D;
+    background-color: #A2FF76;
     border: 1px solid black;
     border-radius: 10px;
     font-family: 'Mont SemiBold';
@@ -264,36 +264,42 @@ a .btn-take-part {
     line-height: 19.8px;
     color: black;
     text-align: center;
-    animation-name: backgroundColorTrue;
-    animation-duration: 1s;
-    animation-iteration-count: 3;
-    animation-delay: 1s;
+    cursor: pointer;
+    opacity: 0.9;
+    animation: backgroundColorTrue 3s ease-in-out 1s 1;
     }
     @keyframes backgroundColorTrue {
         0% {
-            background-image: linear-gradient(135deg, #FFD12D 0%,#A2FF76 50%, #FFD12D 100%);
+            background-color: #FFD12D;
+            opacity: 1;
         }
         25% {
-            background-image: linear-gradient(135deg, #A2FF76 0%,#FFD12D 50%, #A2FF76 100%); 
+            background-color: #A2FF76; 
+            opacity: 1;
         }
         50% {
-            background-image: linear-gradient(135deg, #FFD12D 0%,#A2FF76 50%, #FFD12D 100%);
+            background-color: #FFD12D;
+            opacity: 1;
         }
         75% {
-            background-image: linear-gradient(135deg, #A2FF76 0%,#FFD12D 50%, #A2FF76 100%);  
+            background-color: #A2FF76;
+            opacity: 1;  
         }
         100% {
-            background-image: linear-gradient(135deg, #FFD12D 0%,#A2FF76 50%, #FFD12D 100%);
+            background-color: #FFD12D;
+            opacity: 1;
         }   
     }
     .btn-true:hover {
         background-color: #A2FF76;
-        transition: 0.5s;  
+        opacity: 1;
+        color: black;
+        border-color: white;  
     }
     .btn-false {
         width: 199px;
         height: 50px;
-        background-color: #FFD12D;
+        background-color: #FF7676;
         border: 1px solid black;
         border-radius: 10px;
         font-family: 'Mont SemiBold';
@@ -302,31 +308,37 @@ a .btn-take-part {
         line-height: 19.8px;
         text-align: center;
         color: black;
-        animation-name: backgroundColorFalse;
-        animation-duration: 1s;
-        animation-iteration-count: 3;
-        animation-delay: 1s;
+        opacity: 0.9;
+        cursor: pointer;
+        animation: backgroundColorFalse 3s ease-in-out 1s 1;
     }
     @keyframes backgroundColorFalse {
         0% {
-            background-image: linear-gradient(135deg, #FFD12D 0%,#FF7676 50%, #FFD12D 100%);
+            background-color: #FFD12D;
+            opacity: 1;
         }
         25% {
-            background-image: linear-gradient(135deg, #FF7676 0%,#FFD12D 50%, #FF7676 100%); 
+            background-color: #FF7676;
+            opacity: 1; 
         }
         50% {
-            background-image: linear-gradient(135deg, #FFD12D 0%,#FF7676 50%, #FFD12D 100%);
+            background-color: #FFD12D;
+            opacity: 1;
         }
         75% {
-            background-image: linear-gradient(135deg, #FF7676 0%,#FFD12D 50%, #FF7676 100%);  
+            background-color: #FF7676;  
+            opacity: 1;
         }
         100% {
-            background-image: linear-gradient(135deg, #FFD12D 0%,#FF7676 50%, #FFD12D 100%);
+            background-color: #FFD12D;
+            opacity: 1;
         }   
     }
     .btn-false:hover {
         background-color: #FF7676;
-        transition: 0.5s; 
+        color: white;
+        border-color: white;
+        opacity: 1; 
     }
     .or {
         font-family: 'Mont Regular';
