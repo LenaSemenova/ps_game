@@ -31,6 +31,7 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 .dropdown svg {
     width: 36px;
@@ -151,6 +152,7 @@ body {
 }
 .btn-take-part {
     width: 100%;
+    cursor: pointer;
     padding: 16px 76px 16px 76px;
     border-radius: 10px;
     border: 0px;
@@ -367,6 +369,7 @@ a .btn-take-part {
         line-height: 19.8px;
         color: white;
         opacity: 0.9;
+        cursor: pointer;
         }
         .btn-play:hover {
         opacity: 1;

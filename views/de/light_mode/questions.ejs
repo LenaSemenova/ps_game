@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Wahrheit oder Lüge?</title>
-    <link rel="stylesheet" href="/styles/dark_mode/questions.css" />
+    <link rel="stylesheet" href="/styles/light_mode/questions.css" />
   </head>
   <body>    
     <div class="container">
@@ -19,13 +19,12 @@
     <div class="company-name-mobile"><%= pulledQuestion.company_name %></div>
     <div class="company-description"><%= pulledQuestion.description_de %></div>
     <div class="buttons-wrapper">
-    <form class="formAnswers" action="/game/de/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
+    <form class="formAnswers" action="/game/light-mode/de/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
     <button class="btn-true" name="guess" value="true">WAHRHEIT</button>
     <button class="btn-false" name="guess" value="false">LÜGE</button>
     </form>
     </div>
     </div>
     </div>
-  <!--<script type="module" src="/scripts/ru/dark_mode/questions.js"></script>-->
   </body>
 </html>
