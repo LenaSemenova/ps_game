@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Truth or lie?</title>
-    <link rel="stylesheet" href="/styles/dark_mode/questions.css" />
+    <link rel="stylesheet" href="/styles/light_mode/questions.css" />
   </head>
   <body>    
     <div class="container">
@@ -19,13 +19,12 @@
     <div class="company-name-mobile"><%= pulledQuestion.company_name %></div>
     <div class="company-description"><%= pulledQuestion.description_en %></div>
     <div class="buttons-wrapper">
-    <form class="formAnswers" action="/game/en/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
+    <form class="formAnswers" action="/game/light-mode/en/questions/<%= player_data[0].player_id %>/<%= pulledQuestion.question_id %>/feedback" method="POST">
     <button class="btn-true" name="guess" value="true">TRUTH</button>
     <button class="btn-false" name="guess" value="false">LIE</button>
     </form>
     </div>
     </div>
     </div>
-  <!--<script type="module" src="/scripts/ru/dark_mode/questions.js"></script>-->
   </body>
 </html>

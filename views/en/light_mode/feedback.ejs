@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Got it right?</title>
-    <link rel="stylesheet" href="/styles/dark_mode/feedback.css" />
+    <link rel="stylesheet" href="/styles/light_mode/feedback.css" />
   </head>
   <body>
     <% if(guess  === question[0].company_exists) { %>
@@ -24,9 +24,9 @@
     <div class="company-description"><%= question[0].description_en %></div>
     <% console.log(newPlayerInfo[0].total_questions) %>
     <% if(newPlayerInfo[0].total_questions < 6) { %>
-      <a href="/game/en/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">BACK TO GAME</button></a>
+      <a href="/game/light-mode/en/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">BACK TO GAME</button></a>
       <% } else { %>
-        <a href="/game/en/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">BACK TO GAME</button></a>  
+        <a href="/game/light-mode/en/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">BACK TO GAME</button></a>  
     </div>
     <% } %>
     <% } else { %>
@@ -48,9 +48,9 @@
       <div class="company-description"><%= question[0].description_en %></div>
       <% console.log(newPlayerInfo[0].total_questions) %>
       <% if(newPlayerInfo[0].total_questions < 6) { %>
-      <a href="/game/en/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">BACK TO GAME</button></a>
+      <a href="/game/light-mode/en/questions/<%= newPlayerInfo[0].player_id %>"><button class="btn-back">BACK TO GAME</button></a>
       <% } else { %>
-        <a href="/game/en/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">BACK TO GAME</button></a>  
+        <a href="/game/light-mode/en/<%= newPlayerInfo[0].player_id %>/final_result"><button class="btn-back">BACK TO GAME</button></a>  
       <% } %>
       </div>
     <% } %>
