@@ -74,7 +74,20 @@ const dm_addNewPlayer = async(req, res) => {
     }
 }
 
+// MY DATABASE DOESN'T SUPPORT THE GERMAN UMLAUTS. I DON'T KNOW WHY. I TRIED TO FIX IT BUT DIDN'T SUCCEED.
+// HERE IS A FUNCTION THAT FIXES THE GERMAN UMLAUTS
+
+function fixUmlauts (string) {
+    const clearAE = string.replace(/AE/g, 'ä');
+    const clearOE = clearAE.replace(/OE/g, 'ö');
+    const clearUE = clearOE.replace(/UE/g, 'ü');
+
+    return clearUE;
+}
+
 // NEW QUESTION - DARK MODE - DIFFERENT LANGZUAGES
+
+
 
 const dm_newQuestion = async(req, res) => {
     const playerID = req.params.player_id;
@@ -98,6 +111,8 @@ const dm_newQuestion = async(req, res) => {
                 return res.render('en/dark_mode/questions', {pulledQuestion, player_data});
             }
             if (lang === 'de') {
+                const fixedUmlauts = fixUmlauts(pulledQuestion.description_de);
+                pulledQuestion.description_de = fixedUmlauts;
                 return res.render('de/dark_mode/questions', {pulledQuestion, player_data})
             }
     }  catch (error) {
@@ -146,6 +161,8 @@ const dm_buildFeedback = async(req, res) => {
                 return res.render('en/dark_mode/feedback', {question, newPlayerInfo, guess});
             }
             if (lang === 'de') {
+                const fixedUmlauts = fixUmlauts(question[0].description_de);
+                question[0].description_de = fixedUmlauts;
                 return res.render('de/dark_mode/feedback', {question, newPlayerInfo, guess});
             }
         }
@@ -162,6 +179,8 @@ const dm_buildFeedback = async(req, res) => {
                 return res.render('en/dark_mode/feedback', {question, newPlayerInfo, guess});
             }
             if (lang === 'de') {
+                const fixedUmlauts = fixUmlauts(question[0].description_de);
+                question[0].description_de = fixedUmlauts;
                 return res.render('de/dark_mode/feedback', {question, newPlayerInfo, guess});
             }
         }    
