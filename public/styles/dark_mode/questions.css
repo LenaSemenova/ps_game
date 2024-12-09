@@ -117,7 +117,7 @@ form {
     text-align: center;
     opacity: 0.9;
     cursor: pointer;
-    animation: backgroundColorTrue 2s ease 1s 2;
+    animation: backgroundColorTrue 1s ease 1s 2;
 }
 .buttons-wrapper .btn-true:hover {
     opacity: 1;
@@ -151,7 +151,7 @@ form {
     color: white;
     cursor: pointer;
     opacity: 0.9;
-    animation: backgroundColorFalse 2s ease 2;
+    animation: backgroundColorFalse 1s ease 1s 2;
     
 }
 .buttons-wrapper .btn-false:hover {

@@ -27,7 +27,7 @@ async function collectData (event) {
         errors.push('* Your name is required!');
     }   
     if (phoneNumber.value) {
-        newPlayer.phoneNumber = 'none';
+        newPlayer.phoneNumber = phoneNumber.value;
     }
     if (email.value) {
         newPlayer.email = email.value;

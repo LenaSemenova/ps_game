@@ -37,7 +37,6 @@ const dm_registrationPage = (req, res) => {
 // NEW PLAYER - DARK MODE - DIFFERENT LANGUAGES
 
 const dm_addNewPlayer = async(req, res) => {
-    let newPlayer = {};
     let playerID; 
     console.log('Check if this email is already in the database');
     const data = req.body;
@@ -46,14 +45,14 @@ const dm_addNewPlayer = async(req, res) => {
     const isRegistered = await DB_GENERAL.isRegistered(data.email);
     console.log(isRegistered);
     if(isRegistered.length === 0) {
-        newPlayer.name = data.playerName;
-        if (!data.phoneNumber) {
-            newPlayer.phone_number = null;
-        }
-        newPlayer.email = data.email;
-        newPlayer.total_questions = 0;
-        newPlayer.right_answers = 0;
-        newPlayer.agreement = data.agreement;
+        let newPlayer = { 
+            name: data.playerName, 
+            phone_number: (data.phoneNumber || null), 
+            email: data.email, 
+            total_questions: 0, 
+            right_answers: 0, 
+            agreement: data.agreement 
+        };
         playerID = await startGame(newPlayer);
         return res.redirect(`/game/${lang}/questions/${playerID}`);
     } else {
@@ -128,12 +127,7 @@ const dm_buildFeedback = async(req, res) => {
     // taking player's guess
 
     const data = req.body;
-    let guess;
-    if (data.guess === 'true') {
-        guess = 1;
-    } else {
-        guess = 0;
-    }
+    const guess = data.guess === 'true' ? 1 : 0;
 
     // taking all the infos to render feedback
 
@@ -149,8 +143,8 @@ const dm_buildFeedback = async(req, res) => {
 
     if (question[0].company_exists === guess) {
         console.log('You are right!');
-        playerTotalScore = playerTotalScore + 1;
-        playerRightScore = playerRightScore + 1;
+        playerTotalScore += 1;
+        playerRightScore += 1;
         const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
         if (resultOfTransaction === "ok") {
             const newPlayerInfo = await DB_GENERAL.aboutPlayer(playerID);
@@ -168,7 +162,7 @@ const dm_buildFeedback = async(req, res) => {
         }
     } else {
         console.log('You are false!');
-        playerTotalScore = playerTotalScore + 1;
+        playerTotalScore += 1;
         const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
         if (resultOfTransaction) {
             const newPlayerInfo = await DB_GENERAL.aboutPlayer(playerID);
