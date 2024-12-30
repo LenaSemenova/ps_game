@@ -45,7 +45,7 @@ const lm_addNewPlayer = async(req, res) => {
     const isRegistered = await DB_GENERAL.isRegistered(data.email);
     console.log(isRegistered);
     if(isRegistered.length === 0) {
-        let newPlayer = {
+        const newPlayer = {
             name: data.playerName,
             phone_number: (data.phoneNumber || null),
             email: data.email,
@@ -97,7 +97,7 @@ const lm_newQuestion = async(req, res) => {
         };
         const questions = await DB_GENERAL.availableQuestions(playerID);
         console.log(questions.length);
-        let questionIndex = randomIndex(questions.length);
+        const questionIndex = randomIndex(questions.length);
         console.log(questionIndex);
         const pulledQuestion = questions[questionIndex];
         console.log(pulledQuestion);

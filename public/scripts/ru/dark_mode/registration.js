@@ -6,7 +6,7 @@ const email = document.querySelector('#email');
 const confirmation = document.querySelector('#confirmation');
 const btnStart = document.querySelector('.btn-start');
 
-let newPlayer = {};
+const newPlayer = {};
 let errors = [];
 
 async function sendData(data) {
