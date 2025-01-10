@@ -1,5 +1,3 @@
-import express from "express"; // do I really need this here?
-import { body } from "express-validator";
 import { Router } from "express";
 import controllers_dm from "../controllers/controllers_dm.js";
 import controllers_lm from "../controllers/controllers_lm.js";

@@ -76,7 +76,6 @@ async function collectData (event) {
     }
     
     if (errors.length > 0) {
-        console.log(errors);
         handlingFirstErrors(errors);
     } else {
         const response = await sendData(newPlayer);

@@ -35,7 +35,7 @@ const updateInfos = async(total_questions, right_answers, player_id, question_id
     }
 } catch (error) {
     await connectionTransaction.rollback();
-    console.log('Something went wrong', error);
+    console.error('Something went wrong', error);
 } finally {
     connectionTransaction.release();
 }

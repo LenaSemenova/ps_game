@@ -18,7 +18,6 @@ const DB_GENERAL = {
     getRegistered: async (player_data) => {
         const [result] = await connectionPool.query('INSERT INTO players (name, phone_number, email, total_questions, right_answers, agreement) VALUES(?, ?, ?, ?, ?, ?)',
             [player_data.name, player_data.phone_number, player_data.email, player_data.total_questions, player_data.right_answers, player_data.agreement]);
-            console.log(result.insertId);
             return result.insertId;
     },
     aboutPlayer: async (player_id) => {

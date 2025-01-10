@@ -87,7 +87,7 @@ const dm_addNewPlayer = async(req, res) => {
         const errArr = req.validationErrors;
         return res.status(400).json({ errors: errArr });
     } else { 
-        console.log('No validation errors detected!');
+        // No validation errors detected
     
     let playerID; 
     // Check if this email is already in the database
@@ -95,7 +95,6 @@ const dm_addNewPlayer = async(req, res) => {
     const lang = req.params.lang;
     try {
     const isRegistered = await DB_GENERAL.isRegistered(data.email);
-    console.log(isRegistered);
     if(isRegistered.length === 0) {
         const newPlayer = { 
             name: data.playerName, 
@@ -108,20 +107,16 @@ const dm_addNewPlayer = async(req, res) => {
         playerID = await startGame(newPlayer);
         return res.redirect(`/game/${lang}/questions/${playerID}`);
     } else {
-        console.log(isRegistered.length);
-        console.log(isRegistered[0].total_questions);
         if (isRegistered[0].total_questions < 6) {
-            console.log(`Your questions: ${isRegistered[0].total_questions}`);
             playerID = isRegistered[0].player_id;
             return res.redirect(`/game/${lang}/questions/${playerID}`);
         } else {
-            console.log(`Your questions: ${isRegistered[0].total_questions}`);
             playerID = isRegistered[0].player_id;
             return res.redirect(`/game/${lang}/${playerID}/final_result`);
         }
     }
     } catch (error) {
-        console.log('Error while registration: ', error);
+        console.error('Error while registration: ', error);
     }
  }
 }
@@ -146,16 +141,12 @@ const dm_newQuestion = async(req, res) => {
     const lang = req.params.lang;
     try {
         const player_data = await DB_GENERAL.aboutPlayer(playerID);
-        console.log(player_data);
         const randomIndex = (availableQuestions) => {
             return Math.floor(Math.random() * availableQuestions);
         };
         const questions = await DB_GENERAL.availableQuestions(playerID);
-        console.log(questions.length);
         let questionIndex = randomIndex(questions.length);
-        console.log(questionIndex);
         const pulledQuestion = questions[questionIndex];
-        console.log(pulledQuestion);
             if (lang === 'ru') { 
                 return res.render('ru/dark_mode/questions', {pulledQuestion, player_data});
             }
@@ -168,7 +159,7 @@ const dm_newQuestion = async(req, res) => {
                 return res.render('de/dark_mode/questions', {pulledQuestion, player_data})
             }
     }  catch (error) {
-        console.log('You have to deal with: ' + error);
+        console.error('You have to deal with: ' + error);
         return res.status(500).json({errorMessage: 'No data has been given!'});
     }
 }
@@ -195,7 +186,6 @@ const dm_buildFeedback = async(req, res) => {
     let playerRightScore = playerInfo[0].right_answers;
 
     if (question[0].company_exists === guess) {
-        console.log('You are right!');
         playerTotalScore += 1;
         playerRightScore += 1;
         const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
@@ -214,7 +204,6 @@ const dm_buildFeedback = async(req, res) => {
             }
         }
     } else {
-        console.log('You are false!');
         playerTotalScore += 1;
         const resultOfTransaction = await updateInfos(playerTotalScore, playerRightScore, playerID, questionID);
         if (resultOfTransaction) {
@@ -242,13 +231,9 @@ const dm_finalResult = async(req, res) => {
     try {
     const playerInfo = await DB_GENERAL.aboutPlayer(playerID);
     const isTable = await DB_GENERAL.isTable();
-    console.log(isTable.length);
     for (let i = 0; i < isTable.length; i++) {
-            console.log('Current table: ', isTable[i].Tables_in_petproject_game);
             if (isTable[i].Tables_in_petproject_game === `questions_for_${playerID}`) {
-            console.log(`There is a table for ${playerInfo[0].name}`);
             const deleted = await DB_GENERAL.deleteCopies(playerID);
-            console.log(deleted);
         }
     }
         if (lang === 'ru') { 
@@ -261,7 +246,7 @@ const dm_finalResult = async(req, res) => {
             return res.render('de/dark_mode/final_result', { playerInfo });
         }
     } catch (error) {
-        console.log(error);
+        console.error(error);
     }
 }
 

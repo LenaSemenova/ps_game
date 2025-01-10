@@ -48,7 +48,7 @@ async function sendData(data) {
         body: JSON.stringify(data),
     })
     } catch(error) {
-        console.log('Occurred while fetching: ', error);
+        console.error('Occurred while fetching: ', error);
     }
 }
 
