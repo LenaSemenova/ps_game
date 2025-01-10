@@ -1,6 +1,7 @@
 import DB_GENERAL from "../db_model/db_general.js";
 import updateInfos from "../db_model/db_while_playing.js";
 import startGame from "../db_model/db_start.js";
+import { body, validationResult } from "express-validator";
 
 // MAIN PAGE - DARK MODE - DIFFERENT LANGUAGES 
 const startRedirect = (req, res) => {
@@ -34,18 +35,69 @@ const dm_registrationPage = (req, res) => {
     }
 }
 
+// VALIDATION WITH EXPRESS-VALIDATOR
+
+const isValid = async(req, res) => {
+
+    //Array with the error messages in different languages
+        const errorMessages = {
+            ru: {
+                errName: 'Поле ИМЯ необходимо заполнить. ИМЯ должно содержать не больше 40 символов.',
+                errEmail: 'Поле ЭЛЕКТРОННАЯ ПОЧТА необходимо заполнить настоящим адресом электронной почты.',
+                errConsent: 'СОГЛАСИЕ на обработку персональных данных обязательно.'
+            },
+            en: {
+                errName: 'Your name is required. It is to contain no more than 40 symbols.',
+                errEmail: 'Your REAL e-mail is required.',
+                errConsent: 'Your consent to personal data processing is required.'
+            },
+            de: {
+                errName: 'Feld NAME ist obligatorisch. Es darf höchstens aus 40 Symbolen bestehen.',
+                errEmail: 'Feld E-MAIL ist obligatorisch. Es muss eine echte E-Mail-Adresse sein.',
+                errConsent: 'Deine EINWILLIGUNG muss bestätigt werden.'
+            }
+        }
+
+    const lang = req.params.lang;
+    await body('playerName').isLength({ max: 40 }).withMessage(errorMessages[lang].errName).run(req);
+    await body('email').isEmail().withMessage(errorMessages[lang].errEmail).run(req);
+    await body('agreement').custom((value) => {
+        if(!value) {
+            throw new Error(errorMessages[lang].errConsent);
+        } else {
+            return true;
+        }
+    }).run(req);
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()) {
+        req.validationErrors = errors.array();
+        return req.validationErrors;
+    } else {
+        return true;
+    }
+}
+
+
 // NEW PLAYER - DARK MODE - DIFFERENT LANGUAGES
 
 const dm_addNewPlayer = async(req, res) => {
+    await isValid(req, res);
+    if (req.validationErrors) {
+        const errArr = req.validationErrors;
+        return res.status(400).json({ errors: errArr });
+    } else { 
+        console.log('No validation errors detected!');
+    
     let playerID; 
-    console.log('Check if this email is already in the database');
+    // Check if this email is already in the database
     const data = req.body;
     const lang = req.params.lang;
     try {
     const isRegistered = await DB_GENERAL.isRegistered(data.email);
     console.log(isRegistered);
     if(isRegistered.length === 0) {
-        let newPlayer = { 
+        const newPlayer = { 
             name: data.playerName, 
             phone_number: (data.phoneNumber || null), 
             email: data.email, 
@@ -71,6 +123,7 @@ const dm_addNewPlayer = async(req, res) => {
     } catch (error) {
         console.log('Error while registration: ', error);
     }
+ }
 }
 
 // MY DATABASE DOESN'T SUPPORT THE GERMAN UMLAUTS. I DON'T KNOW WHY. I TRIED TO FIX IT BUT DIDN'T SUCCEED.

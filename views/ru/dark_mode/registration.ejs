@@ -31,7 +31,7 @@
             <label for="name">Имя</label>
             <input type="text" name="name" id="name" required />
             <label for="phone-number">Номер телефона</label>
-            <input type="text" name="phone-number" id="phone-number" required />
+            <input type="text" name="phone-number" id="phone-number" />
             <label for="email">Электронная почта</label>
             <input type="email" name="email" id="email" required />
             <div class="confirmation-box">
@@ -48,6 +48,15 @@
     </div>
     </div>  
     </div>
+    <div class="modal-window">
+      <span class="close">&times;</span>
+      <div class="modal-window-content">
+        <div class="content-title">ВОЗМОЖНЫЕ ОШИБКИ ПРИ РЕГИСТРАЦИИ</div>
+        <div class="for-errors"></div>
+      <!-- Here will be shown all the infos about possible validation errors -->
+      <button class="btn-back">ВЕРНУТЬСЯ К РЕГИСТРАЦИИ</button>
+      </div>
+      </div>
   <script type="module" src="/scripts/ru/dark_mode/registration.js"></script>
   </body>
 </html>
