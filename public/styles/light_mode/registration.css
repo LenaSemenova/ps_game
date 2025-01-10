@@ -247,6 +247,9 @@ input.checkbox {
     opacity: 0.9;
     cursor: pointer;
 }
+.btn-back:hover {
+    opacity: 1;
+}
 .close {
     cursor: pointer;
     position: absolute;

@@ -51,8 +51,8 @@ const isValid = async(req, res) => {
             errConsent: 'Your consent to personal data processing is required.'
         },
         de: {
-            errName: 'Feld NAME ist obligatorisch. Es darf höchstens aus 40 Symbolen bestehen.',
-            errEmail: 'Feld E-MAIL ist obligatorisch. Es muss eine echte E-Mail-Adresse sein.',
+            errName: 'Feld NAME ist erforderlich. Es darf höchstens aus 40 Symbolen bestehen.',
+            errEmail: 'Feld E-MAIL ist erforderlich. Es muss eine echte E-Mail-Adresse sein.',
             errConsent: 'Deine EINWILLIGUNG muss bestätigt werden.'
         }
     }
