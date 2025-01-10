@@ -22,3 +22,8 @@
   <li><a href="https://docs.google.com/spreadsheets/d/1yiXrIgpqmw3T9MTWZld9QOT0sKCiGfKelvem-FSw4WA/edit?gid=0#gid=0">Original contents of the game (Samir Tagiev)</a></li>
 </ul>
 <h3>At the end of this README file there are two gif-images that demonstrate what the game looks like run on a local server.</h3>
+<h1>GIF IMAGES (DEMONSTRATION)</h1>
+<h2>ТЁМНАЯ ВЕРСИЯ | DARK VERSION</h2>
+<img src='./demos/dark_version.gif'>
+<h2>СВЕТЛАЯ ВЕРСИЯ | DARK VERSION</h2>
+<img src='./demos/light_version.gif'>
