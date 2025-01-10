@@ -9,7 +9,7 @@
   <li><a href="https://github.com/Bounty2049/game_backend">Оригинальный back-end (Данил Осотов)</a></li>
   <li><a href="https://docs.google.com/spreadsheets/d/1yiXrIgpqmw3T9MTWZld9QOT0sKCiGfKelvem-FSw4WA/edit?gid=0#gid=0">Оригинальное содержание игры (Самир Тагиев)</a></li>
 </ul>
-<h3>В конце README файла есть гифки с демонстрацией игры на локальном сервере.</h3>
+<h3>В конце README файла есть <a href='#demos>гифки с демонстрацией игры</a> на локальном сервере.</h3>
 
 <h1 id="en"><b>*EN* / 'TRUTH OR LIE' GAME</b></h1>
 <h2>What is this game about?</h2>
@@ -21,8 +21,8 @@
   <li><a href="https://github.com/Bounty2049/game_backend">Original back-end code (Danil Osotov)</a></li>
   <li><a href="https://docs.google.com/spreadsheets/d/1yiXrIgpqmw3T9MTWZld9QOT0sKCiGfKelvem-FSw4WA/edit?gid=0#gid=0">Original contents of the game (Samir Tagiev)</a></li>
 </ul>
-<h3>At the end of this README file there are two gif-images that demonstrate what the game looks like run on a local server.</h3>
-<h1>GIF IMAGES (DEMONSTRATION)</h1>
+<h3>At the end of this README file there are <a href='#demos>two gif-images that demonstrate</a> what the game looks like run on a local server.</h3>
+<h1 id="demos">GIF IMAGES (DEMONSTRATION)</h1>
 <h2>ТЁМНАЯ ВЕРСИЯ | DARK VERSION</h2>
 <img src='./demos/dark_version.gif'>
 <h2>СВЕТЛАЯ ВЕРСИЯ | DARK VERSION</h2>
