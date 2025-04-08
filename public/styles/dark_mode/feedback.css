@@ -6,6 +6,18 @@
     font-family: 'Mont SemiBold';
     src: url('./public/fonts/Mont-SemiBold.ttf') format('truetype');
 }
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #FFD12D;
+}
+
+::-webkit-scrollbar-button:single-button {
+    display: none;
+}
+
 body {
     margin: 0;
     display: grid;
